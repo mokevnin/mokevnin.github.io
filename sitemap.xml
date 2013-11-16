@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://mokevnin.github.io/blog/2012/06/03/migration/</loc>
+        <lastmod>2013-11-16T19:24:16+04:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://mokevnin.github.io/blog/2012/06/03/razdelenie-polucheniya-i-ispolzovaniya/
+        </loc>
+        <lastmod>2013-11-16T19:24:16+04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mokevnin.github.io/blog/2012/10/17/custom-url-slash-path-helpers/</loc>
+        <lastmod>2013-11-16T19:24:16+04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mokevnin.github.io/blog/2012/10/20/observers/</loc>
+        <lastmod>2013-11-16T19:24:16+04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mokevnin.github.io/blog/2013/11/14/pnu/</loc>
+        <lastmod>2013-11-16T19:24:16+04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mokevnin.github.io/blog/archives/</loc>
+        <lastmod>2013-11-16T19:24:16+04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mokevnin.github.io/</loc>
+        <lastmod>2013-11-16T19:24:16+04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mokevnin.github.io/robots.txt</loc>
+        <lastmod>2013-11-15T13:12:53+04:00</lastmod>
+    </url>
+</urlset>

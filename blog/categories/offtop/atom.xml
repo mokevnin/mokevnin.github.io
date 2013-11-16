@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: offtop | Совершенный код]]></title>
+  <link href="http://mokevnin.github.io/blog/categories/offtop/atom.xml" rel="self"/>
+  <link href="http://mokevnin.github.io/"/>
+  <updated>2013-11-16T19:29:59+04:00</updated>
+  <id>http://mokevnin.github.io/</id>
+  <author>
+    <name><![CDATA[Мокевнин Кирилл]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Переезд]]></title>
+    <link href="http://mokevnin.github.io/blog/2012/06/03/migration/"/>
+    <updated>2012-06-03T20:14:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2012/06/03/migration</id>
+    <content type="html"><![CDATA[<p>Долго я ничего не писал, но пришло время jekyll). Самое приятное в этом то, что весь текст пишется в виме (как раз сегодня поменял сборку с akitaonrails на janus).</p>
+
+<p>По долгу службы большую часть времени я провожу за анализом кода и прокачиванию разработчиков. И в процессе обнаруживается много разных интересных закономерностей, подходов и антиподходов. Мной уже написано несколько статей на хабре (так же их можно найти на kaize.github.com). В этом блоге я планирую писать небольшие заметки о best practices веб разработки на ruby on rails и смежных технологиях.</p>
+]]></content>
+  </entry>
+  
+</feed>

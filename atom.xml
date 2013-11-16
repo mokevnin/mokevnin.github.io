@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Совершенный код]]></title>
+  <link href="http://mokevnin.github.io/atom.xml" rel="self"/>
+  <link href="http://mokevnin.github.io/"/>
+  <updated>2013-11-16T19:29:59+04:00</updated>
+  <id>http://mokevnin.github.io/</id>
+  <author>
+    <name><![CDATA[Мокевнин Кирилл]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Принцип наименьшего удивления (ПНУ)]]></title>
+    <link href="http://mokevnin.github.io/blog/2013/11/14/pnu/"/>
+    <updated>2013-11-14T23:54:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2013/11/14/pnu</id>
+    <content type="html"><![CDATA[<p>Несмотря на то что это <a href="http://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%BE_%D0%BD%D0%B0%D0%B8%D0%BC%D0%B5%D0%BD%D1%8C%D1%88%D0%B5%D0%B3%D0%BE_%D1%83%D0%B4%D0%B8%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F">принцип</a> достаточно известный и понятный, часто им пренебрегают думая что “в моей ситуации по другому нельзя”, либо просто не понимая последствий этого решения для будущей поддержки проекта.</p>
+
+<p>Небольшая оговорка: рекомендую посмотреть мое выступление с докладом “ментальное программирование” где изложена эта и многие другие концепции.</p>
+
+<p>Разберем конкретный пример.
+Исходные данные: В проекте есть CRUD для управления пользователями.
+Задача: вместо удаления делать soft destroy, чтобы иметь возможность восстановить пользователя.</p>
+
+<!-- more -->
+
+
+<p>В коде удаление выглядит вот так: user.destroy().</p>
+
+<p>Любой опытный ruby девелопер сразу же находит множество гемов которые решают эту задачу. В большинстве случаев решение сводится к <em>переопределению</em> метода destroy, таким образом, что теперь он выставляет флаг “deleted”. У некоторых при этом, где-то глубоко в мозгу, возникает мысль “а не хуйню ли я делаю?”.</p>
+
+<p>Что же мы натворили?</p>
+
+<ul>
+<li>Стандартное, общепринятое решение, теперь, в некоторых ситуациях, работает <em>особым</em> образом, нарушая ПНУ, а заодно не соответствует принципам “ментального программирования”. Это в свою очередь приводит к тому что программисту нужно больше держать в голове деталей, и постоянно сомневаться. Легко ли вы выполните user.destroy в терминале на продакшене? ;) Я думаю что вы сначала будете думать “а сработает ли” и самое хреновое, то что оно может не сработать (бага, настройки, удалили гем и заменили на другой).</li>
+<li>Вырабатывается неправильная привычка из-за которой в другом проекте (с другим подходом) можно поиметь проблем.</li>
+<li>Поле “destroyed” это, вообще говоря, неверно. Наличие полей определяющих состояния вместо нормального конечного автомата, приводит к куче говнокода и постоянной рукопашке (учитывая наличие нормальных гемов).</li>
+</ul>
+
+
+<p>А давайте проведем эксперимент. Предлагаю всем заинтересованным написать свои подходы для решения этой задачи в комментариях, и после этого я опубликую вторую часть статьи.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[active record observers]]></title>
+    <link href="http://mokevnin.github.io/blog/2012/10/20/observers/"/>
+    <updated>2012-10-20T20:08:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2012/10/20/observers</id>
+    <content type="html"><![CDATA[<p>В обсерверы стоит выносить нотификации, взаимодействие с внешними системами (отправка в твиттер и т.п.), отправка сообщений в очередь, логирование, в общем все что касается оповещений и инфраструктуры. При этом не стоит выносить в обсерверы все что связано с изменением состояния ваших моделей, воспользуйтесь для этого, хотя бы, колбеками. Проверить нужно ли использовать обсервер или нет, достаточно просто, так если при его отключении нарушится консистентность данных, скорее всего этому коду там не место.</p>
+
+<!-- more -->
+
+
+<p>Существует стандартная практика именования обсерверов по имени модели: UserObserver. Это, скорее всего, приведет к тому что на каждую сущность будет по одному обсерверу, который включит в себя все что только можно. Это прямое нарушение single responsibility principe. Одной из последующих проблем станет невозможность отключить какой-то аспект, например, отправку сообщений в очередь в тестовом окружении. Придется выключать весь обсервер или переписывать код. Намного лучше, все же, делить обсерверы по решамым ими задачам. Если есть необходимость отправлять письма при изменении состояния пользователя, то стоит создать UserNotificationObserver в котором сосредоточить всю логику отправки пользовательских нотификаций.</p>
+
+<p>Пример:</p>
+
+<figure class='code'><figcaption><span>app/observers/person_elastic_observer.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">PersonElasticObserver</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Observer</span>
+</span><span class='line'>  <span class="n">observe</span> <span class="ss">:person</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">after_save</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="n">broadcasts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">b</span><span class="o">.</span><span class="n">tire</span><span class="o">.</span><span class="n">update_index</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">after_destroy</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="n">broadcasts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">b</span><span class="o">.</span><span class="n">tire</span><span class="o">.</span><span class="n">update_index</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Обсерверам не место рядом с моделями. Удобнее всего их хранить в папке app/observers.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[custom url/path helpers]]></title>
+    <link href="http://mokevnin.github.io/blog/2012/10/17/custom-url-slash-path-helpers/"/>
+    <updated>2012-10-17T14:00:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2012/10/17/custom-url-slash-path-helpers</id>
+    <content type="html"><![CDATA[<p>В проектах иногда встречаются ссылки, которые строятся без url helpers или
+содержат логику. Часто по этому поводу либо не заморачиваются, либо пишут обертки где придется и как придется.</p>
+
+<p>А можно поступить так:</p>
+
+<figure class='code'><figcaption><span>lib/custom_url_helpers.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">module</span> <span class="nn">CustomUrlHelpers</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">register_with_facebook_cpath</span>
+</span><span class='line'>    <span class="ss">Gateway</span><span class="p">:</span><span class="ss">:Facebook</span><span class="o">.</span><span class="n">url_for_callback</span><span class="p">(</span><span class="n">register_user_facebook_url</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create_link_to_facebook_cpath</span>
+</span><span class='line'>    <span class="ss">Gateway</span><span class="p">:</span><span class="ss">:Facebook</span><span class="o">.</span><span class="n">url_for_callback</span><span class="p">(</span><span class="n">create_link_account_facebook_url</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">edit_company_account_curl</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">case</span> <span class="n">account</span>
+</span><span class='line'>      <span class="k">when</span> <span class="o">::</span><span class="ss">Company</span><span class="p">:</span><span class="ss">:CrmAccount</span>
+</span><span class='line'>        <span class="n">edit_company_crm_account_url</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">when</span> <span class="o">::</span><span class="ss">Company</span><span class="p">:</span><span class="ss">:GisAccount</span>
+</span><span class='line'>        <span class="n">edit_company_gis_account_url</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">facebook_auth_cpath</span>
+</span><span class='line'>    <span class="s1">&#39;/auth/facebook&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>Эти методы оканчиваются на cpath и curl, что означает custom path и custom url соответственно.</p>
+
+<p>Подключение к проекту:</p>
+
+<figure class='code'><figcaption><span>app/helpers/web/application_helper.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">CustomUrlHelpers</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Разделение получения и использования]]></title>
+    <link href="http://mokevnin.github.io/blog/2012/06/03/razdelenie-polucheniya-i-ispolzovaniya/"/>
+    <updated>2012-06-03T20:54:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2012/06/03/razdelenie-polucheniya-i-ispolzovaniya</id>
+    <content type="html"><![CDATA[<p>В ruby очень распостранены цепочки кода, а еще любовь к &ldquo;однострочникам&rdquo;. Только не все йогурты одинаково полезны.</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span>somewhere_in_test.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">sign_in</span><span class="p">(</span><span class="n">create</span> <span class="ss">:user</span><span class="p">)</span> <span class="c1"># factory_girl, test</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Тот случай когда красота обманчива. Что может понадобится:</p>
+
+<ul>
+<li>распечатать user для дебага;</li>
+<li>использовать его дальше по коду.</li>
+</ul>
+
+
+<p>В конечном счете, этот код заставляет переписать его тех, кто дальше с ним
+работает.</p>
+
+<figure class='code'><figcaption><span>somewhere_in_test.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">assert_equal</span> <span class="n">attrs</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="p">,</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="n">attrs</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Иногда так делают, когда тест пишется первый раз и все обходится одной
+проверкой. Дальше, как обычно, придется переписывать.</p>
+
+<p>Еще пример:</p>
+
+<figure class='code'><figcaption><span>somewhere_in_test.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">def</span> <span class="nf">destroy</span>
+</span><span class='line'>  <span class="no">Company</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">destroy</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Иногда, действительно, подход сработает и казалось бы зачем писать на одну
+строчку больше. Но на самом деле вы заранее об этом, скорее всего, не
+знаете и не можете гарантировать что получаемые данные не будут
+использованы дальше по коду, я уже не говорю об отладке.</p>
+
+<h3>Резюме</h3>
+
+<p>В <a href="http://ru.wikipedia.org/wiki/Python#.D0.A4.D0.B8.D0.BB.D0.BE.D1.81.D0.BE.D1.84.D0.B8.D1.8F">философии питона</a>
+есть очень хороший принцип подходящий под ситуацию:
+&ldquo;особые случаи не настолько особы, чтобы нарушать правила&rdquo;. А правило может звучать так: &ldquo;получаем отдельно, используем
+отдельно&rdquo;.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Переезд]]></title>
+    <link href="http://mokevnin.github.io/blog/2012/06/03/migration/"/>
+    <updated>2012-06-03T20:14:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2012/06/03/migration</id>
+    <content type="html"><![CDATA[<p>Долго я ничего не писал, но пришло время jekyll). Самое приятное в этом то, что весь текст пишется в виме (как раз сегодня поменял сборку с akitaonrails на janus).</p>
+
+<p>По долгу службы большую часть времени я провожу за анализом кода и прокачиванию разработчиков. И в процессе обнаруживается много разных интересных закономерностей, подходов и антиподходов. Мной уже написано несколько статей на хабре (так же их можно найти на kaize.github.com). В этом блоге я планирую писать небольшие заметки о best practices веб разработки на ruby on rails и смежных технологиях.</p>
+]]></content>
+  </entry>
+  
+</feed>

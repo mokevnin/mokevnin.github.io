@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: separation, | Совершенный код]]></title>
+  <link href="http://mokevnin.github.io/blog/categories/separation/atom.xml" rel="self"/>
+  <link href="http://mokevnin.github.io/"/>
+  <updated>2013-11-16T19:29:59+04:00</updated>
+  <id>http://mokevnin.github.io/</id>
+  <author>
+    <name><![CDATA[Мокевнин Кирилл]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Разделение получения и использования]]></title>
+    <link href="http://mokevnin.github.io/blog/2012/06/03/razdelenie-polucheniya-i-ispolzovaniya/"/>
+    <updated>2012-06-03T20:54:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2012/06/03/razdelenie-polucheniya-i-ispolzovaniya</id>
+    <content type="html"><![CDATA[<p>В ruby очень распостранены цепочки кода, а еще любовь к &ldquo;однострочникам&rdquo;. Только не все йогурты одинаково полезны.</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>somewhere_in_test.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;sign_in(create :user) # factory_girl, test&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Тот случай когда красота обманчива. Что может понадобится:</p>
+
+<ul>
+<li>распечатать user для дебага;</li>
+<li>использовать его дальше по коду.</li>
+</ul>
+
+
+<p>В конечном счете, этот код заставляет переписать его тех, кто дальше с ним
+работает.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>somewhere_in_test.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;assert_equal attrs[:name], User.find_by_email(attrs[:email]).name&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Иногда так делают, когда тест пишется первый раз и все обходится одной
+проверкой. Дальше, как обычно, придется переписывать.</p>
+
+<p>Еще пример:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>somewhere_in_test.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;def destroy</span>
+</span><span class='line'><span class="sr">  Company.find(params[:id]).destroy</span>
+</span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Иногда, действительно, подход сработает и казалось бы зачем писать на одну
+строчку больше. Но на самом деле вы заранее об этом, скорее всего, не
+знаете и не можете гарантировать что получаемые данные не будут
+использованы дальше по коду, я уже не говорю об отладке.</p>
+
+<h3>Резюме</h3>
+
+<p>В <a href="http://ru.wikipedia.org/wiki/Python#.D0.A4.D0.B8.D0.BB.D0.BE.D1.81.D0.BE.D1.84.D0.B8.D1.8F">философии питона</a>
+есть очень хороший принцип подходящий под ситуацию:
+&ldquo;особые случаи не настолько особы, чтобы нарушать правила&rdquo;. А правило может звучать так: &ldquo;получаем отдельно, используем
+отдельно&rdquo;.</p>
+]]></content>
+  </entry>
+  
+</feed>

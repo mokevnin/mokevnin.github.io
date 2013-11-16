@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: active | Совершенный код]]></title>
+  <link href="http://mokevnin.github.io/blog/categories/active/atom.xml" rel="self"/>
+  <link href="http://mokevnin.github.io/"/>
+  <updated>2013-11-16T19:29:59+04:00</updated>
+  <id>http://mokevnin.github.io/</id>
+  <author>
+    <name><![CDATA[Мокевнин Кирилл]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[active record observers]]></title>
+    <link href="http://mokevnin.github.io/blog/2012/10/20/observers/"/>
+    <updated>2012-10-20T20:08:00+04:00</updated>
+    <id>http://mokevnin.github.io/blog/2012/10/20/observers</id>
+    <content type="html"><![CDATA[<p>В обсерверы стоит выносить нотификации, взаимодействие с внешними системами (отправка в твиттер и т.п.), отправка сообщений в очередь, логирование, в общем все что касается оповещений и инфраструктуры. При этом не стоит выносить в обсерверы все что связано с изменением состояния ваших моделей, воспользуйтесь для этого, хотя бы, колбеками. Проверить нужно ли использовать обсервер или нет, достаточно просто, так если при его отключении нарушится консистентность данных, скорее всего этому коду там не место.</p>
+
+<!-- more -->
+
+
+<p>Существует стандартная практика именования обсерверов по имени модели: UserObserver. Это, скорее всего, приведет к тому что на каждую сущность будет по одному обсерверу, который включит в себя все что только можно. Это прямое нарушение single responsibility principe. Одной из последующих проблем станет невозможность отключить какой-то аспект, например, отправку сообщений в очередь в тестовом окружении. Придется выключать весь обсервер или переписывать код. Намного лучше, все же, делить обсерверы по решамым ими задачам. Если есть необходимость отправлять письма при изменении состояния пользователя, то стоит создать UserNotificationObserver в котором сосредоточить всю логику отправки пользовательских нотификаций.</p>
+
+<p>Пример:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app/observers/person_elastic_observer.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;class PersonElasticObserver &amp;lt; ActiveRecord::Observer</span>
+</span><span class='line'><span class="sr">  observe :person&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">def</span> <span class="nf">after_save</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;person.broadcasts.each do |b|</span>
+</span><span class='line'><span class="sr">  b.tire.update_index</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">def</span> <span class="nf">after_destroy</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;person.broadcasts.each do |b|</span>
+</span><span class='line'><span class="sr">  b.tire.update_index</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end</span>
+</span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Обсерверам не место рядом с моделями. Удобнее всего их хранить в папке app/observers.</p>
+]]></content>
+  </entry>
+  
+</feed>
