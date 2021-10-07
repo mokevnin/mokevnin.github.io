@@ -98,3 +98,5 @@ google_analytics_tracking_id: UA-10536397-5
 
 # Facebook Like
 facebook_like: true
+
+theme: jekyll-theme-minimal
