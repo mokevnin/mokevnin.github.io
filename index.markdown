@@ -3,9 +3,8 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: page
+title: Мои материалы
 ---
-
-# Мои материалы
 
 Всем привет, меня зовут Кирилл Мокевнин и на этом сайте собраны ссылки на мои материалы, разбросанные по всей сети
 
