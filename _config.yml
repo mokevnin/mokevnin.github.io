@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Кирилл Мокевнин
+title: Был замечен
 email: mokevnin@gmail.com
 description: |
   Ссылки на статьи, видео и другое

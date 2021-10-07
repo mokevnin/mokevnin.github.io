@@ -5,9 +5,13 @@
 layout: page
 ---
 
+# Мои материалы
+
+Всем привет, меня зовут Кирилл Мокевнин и на этом сайте собраны ссылки на мои материалы, разбросанные по всей сети
+
 ## Статьи
 
-* https://ru.hexlet.io/u/mokevnin/blog_posts
+* [Статьи на Хекслете](https://ru.hexlet.io/u/mokevnin/blog_posts)
 
 ## Видео
 
@@ -30,7 +34,7 @@ layout: page
 
 ### Вебинары
 
-* [Репутация или Деньги | Бедная жизнь в Майами](https://www.youtube.com/watch?v=UKjmafONRsg) (Мы обречены)
+* [Репутация или Деньги / Бедная жизнь в Майами](https://www.youtube.com/watch?v=UKjmafONRsg) (Мы обречены)
 * [Что такое инженерная культура](https://www.youtube.com/watch?v=rQ_IXr1VkAA) (Math.random)
 * [О том куда идет фронтенд](https://www.youtube.com/watch?v=oylJcKEuNRw) (Фронтенд Юность)
 
