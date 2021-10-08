@@ -42,3 +42,4 @@ title: Мои материалы
 ### Подкасты
 
 * [Обязательные знания для программиста](https://www.youtube.com/watch?v=GoAixzrElQc) (Podlodka)
+* [Обучение программистов бесплатно за два часа без смс](https://devzen.ru/episode-0226/) (DevZen)
