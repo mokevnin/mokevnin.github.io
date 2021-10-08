@@ -26,6 +26,7 @@ title: Мои материалы
 * [Архитектура должна быть скучной](https://www.youtube.com/watch?v=NbMt4uFIL8c) (RailsRussia)
 * [Как мы ушли от локальной разработки](https://www.youtube.com/watch?v=WVjz0HcAWOs) (TechLeadConf)
 * [Гарри Поттер и методы прагматичного программирования](https://www.youtube.com/watch?v=zrUwYBzb9zY) (TechLeadConf)
+* [Эффективное тестирование фронтенда](https://youtu.be/e9DRhxRwsfU) (Podlodka Frontend Crew)
 
 ### Митапы
 
