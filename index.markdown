@@ -32,6 +32,7 @@ title: Мои материалы
 ### Митапы
 
 * [Разбор принципов программирования](https://youtu.be/OPa-ZVBtV0U?t=1873)
+* [Чем другие фреймворки лучше Rails](https://www.youtube.com/watch?v=bP_sNPgiJKY)
 
 ### Вебинары
 
