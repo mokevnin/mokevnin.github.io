@@ -10,6 +10,7 @@ title: Мои материалы
 
 ## Тексты
 
+* [Организованное программирование (тг-канал)](https://t.me/orgprog)
 * [Статьи на Хекслете](https://ru.hexlet.io/u/mokevnin/blog_posts)
 * [Треды в твиттере](https://guides.hexlet.io/usefull-twitter-threads/)
 
