@@ -26,9 +26,12 @@ title: Мои материалы
 * [Почему сложно программировать UI](https://www.youtube.com/watch?v=DCeNCr2tKOI) (FrontHub)
 * [Формирование инженерной культуры](https://www.youtube.com/watch?v=W7GlELjRODw) (AgileDays)
 * [Архитектура должна быть скучной](https://www.youtube.com/watch?v=NbMt4uFIL8c) (RailsRussia)
+<!-- * [От фабрик к фикстурам](RubyRussia) -->
 * [Как мы ушли от локальной разработки](https://www.youtube.com/watch?v=WVjz0HcAWOs) (TechLeadConf)
 * [Гарри Поттер и методы прагматичного программирования](https://www.youtube.com/watch?v=zrUwYBzb9zY) (TechLeadConf)
 * [Эффективное тестирование фронтенда](https://youtu.be/e9DRhxRwsfU) (Podlodka Frontend Crew)
+* [Конечные автоматы как способ значительно упростить логику и понимание кода](https://www.youtube.com/watch?v=Yi2E1DIqoow&t=20041s) (KolesaConf)
+
 
 ### Митапы
 
@@ -40,7 +43,7 @@ title: Мои материалы
 * [Репутация или Деньги / Бедная жизнь в Майами](https://www.youtube.com/watch?v=UKjmafONRsg) (Мы обречены)
 * [Что такое инженерная культура](https://www.youtube.com/watch?v=rQ_IXr1VkAA) (Math.random)
 * [О том куда идет фронтенд](https://www.youtube.com/watch?v=oylJcKEuNRw) (Фронтенд Юность)
-* [Как это работает: IT-индустрия и современные онлайн-школы](https://medium.com/funboxteam/%D0%BA%D0%B0%D0%BA-%D1%8D%D1%82%D0%BE-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82-it-%D0%B8%D0%BD%D0%B4%D1%83%D1%81%D1%82%D1%80%D0%B8%D1%8F-%D0%B8-%D1%81%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%88%D0%BA%D0%BE%D0%BB%D1%8B-c84b6bf80813) (FunBoxTeam, расшифровка вебинара)
+* [Как это работает: IT-индустрия и современные онлайн-школы](https://medium.com/funboxteam/как-это-работает-it-индустрия-и-современные-онлайн-школы-c84b6bf80813) (FunBoxTeam, расшифровка вебинара)
 
 ### Подкасты
 
