@@ -18,7 +18,7 @@ title: Мои материалы
 
 * [Мой канал о разработке и жизни в штатах](https://www.youtube.com/c/KirillMokevnin)
 
-### Конференции
+### Конференции и Митапы
 
 * [Ментальное программирование I](https://www.youtube.com/watch?v=EEq1wdM2M2w) (HappyDev)
 * [Ментальное программирование II](https://www.youtube.com/watch?v=vkUTX1hruF8) (DevConf)
@@ -31,22 +31,21 @@ title: Мои материалы
 * [Гарри Поттер и методы прагматичного программирования](https://www.youtube.com/watch?v=zrUwYBzb9zY) (TechLeadConf)
 * [Эффективное тестирование фронтенда](https://youtu.be/e9DRhxRwsfU) (Podlodka Frontend Crew)
 * [Конечные автоматы как способ значительно упростить логику и понимание кода](https://www.youtube.com/watch?v=Yi2E1DIqoow&t=20041s) (KolesaConf)
-
-
-### Митапы
-
 * [Разбор принципов программирования](https://youtu.be/OPa-ZVBtV0U?t=1873)
-* [Чем другие фреймворки лучше Rails](https://www.youtube.com/watch?v=bP_sNPgiJKY)
+
 
 ### Вебинары
 
-* [Репутация или Деньги / Бедная жизнь в Майами](https://www.youtube.com/watch?v=UKjmafONRsg) (Мы обречены)
 * [Что такое инженерная культура](https://www.youtube.com/watch?v=rQ_IXr1VkAA) (Math.random)
 * [О том куда идет фронтенд](https://www.youtube.com/watch?v=oylJcKEuNRw) (Фронтенд Юность)
+* [Чем другие фреймворки лучше Rails](https://www.youtube.com/watch?v=bP_sNPgiJKY)
 * [Как это работает: IT-индустрия и современные онлайн-школы](https://medium.com/funboxteam/как-это-работает-it-индустрия-и-современные-онлайн-школы-c84b6bf80813) (FunBoxTeam, расшифровка вебинара)
 
 ### Подкасты
 
+* [Репутация или Деньги / Бедная жизнь в Майами](https://www.youtube.com/watch?v=UKjmafONRsg) (Мы обречены)
+* [Обучение, технологии и трудоустройство](https://www.youtube.com/watch?v=0Dt8yJq34tw)
+* [Как обучать программистов правильно](https://www.youtube.com/watch?v=iM-gFlCLcLk)
 * [Обязательные знания для программиста](https://www.youtube.com/watch?v=GoAixzrElQc) (Podlodka)
 * [Продуктивность разработчика](https://www.youtube.com/watch?v=ajZD5IDD72M) (Podlodka)
 * [Обучение программистов бесплатно за два часа без смс](https://devzen.ru/episode-0226/) (DevZen)
