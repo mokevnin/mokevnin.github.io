@@ -44,6 +44,7 @@ title: Мои материалы
 ### Подкасты
 
 * [Репутация или Деньги / Бедная жизнь в Майами](https://www.youtube.com/watch?v=UKjmafONRsg) (Мы обречены)
+* [Крутой продукт или маркетинг. Бум в EdTech. Пешеходная жизнь в США.](https://www.youtube.com/watch?app=desktop&v=ChlVgqzArUg)
 * [Обучение, технологии и трудоустройство](https://www.youtube.com/watch?v=0Dt8yJq34tw)
 * [Как обучать программистов правильно](https://www.youtube.com/watch?v=iM-gFlCLcLk)
 * [Обязательные знания для программиста](https://www.youtube.com/watch?v=GoAixzrElQc) (Podlodka)
