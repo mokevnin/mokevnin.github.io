@@ -50,3 +50,5 @@ title: Мои материалы
 * [Обязательные знания для программиста](https://www.youtube.com/watch?v=GoAixzrElQc) (Podlodka)
 * [Продуктивность разработчика](https://www.youtube.com/watch?v=ajZD5IDD72M) (Podlodka)
 * [Обучение программистов бесплатно за два часа без смс](https://devzen.ru/episode-0226/) (DevZen)
+* [Кирилл Мокевнин и Hexlet.io](https://podcasts.apple.com/ru/podcast/06-кирилл-мокевнин-и-hexlet-io/id1418009808?i=1000421270087) (// TODO FIXME)
+* [ Кирилл Мокевнин, Hexlet.io](https://podster.fm/podcasts/5minreact/e/179311/33-kirill-mokevnin-hexletio) (Пятиминутка React)
