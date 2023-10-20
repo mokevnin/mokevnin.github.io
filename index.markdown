@@ -26,7 +26,7 @@ title: Мои материалы
 * [Почему сложно программировать UI](https://www.youtube.com/watch?v=DCeNCr2tKOI) (FrontHub)
 * [Формирование инженерной культуры](https://www.youtube.com/watch?v=W7GlELjRODw) (AgileDays)
 * [Архитектура должна быть скучной](https://www.youtube.com/watch?v=NbMt4uFIL8c) (RailsRussia)
-<!-- * [От фабрик к фикстурам](RubyRussia) -->
+* [От фабрик к фикстурам](https://www.youtube.com/watch?v=whJ-6PKqGOc&lc=UgwZZup1BRDsB_oP6tp4AaABAg) (RubyRussia)
 * [Как мы ушли от локальной разработки](https://www.youtube.com/watch?v=WVjz0HcAWOs) (TechLeadConf)
 * [Гарри Поттер и методы прагматичного программирования](https://www.youtube.com/watch?v=zrUwYBzb9zY) (TechLeadConf)
 * [Эффективное тестирование фронтенда](https://youtu.be/e9DRhxRwsfU) (Podlodka Frontend Crew)
