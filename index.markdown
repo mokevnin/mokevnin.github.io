@@ -43,6 +43,8 @@ title: Мои материалы
 
 ### Подкасты
 
+* [Как быть готовым к любому тех. интервью](https://www.youtube.com/watch?v=d__AzR2on5A) (Помогите, я джун)
+* [Об инфоцыганах и бизнес амбициях](https://www.youtube.com/watch?v=GXVzL3AFrLw) (IT-KAMASUTRA)
 * [Репутация или Деньги / Бедная жизнь в Майами](https://www.youtube.com/watch?v=UKjmafONRsg) (Мы обречены)
 * [Крутой продукт или маркетинг. Бум в EdTech. Пешеходная жизнь в США.](https://www.youtube.com/watch?app=desktop&v=ChlVgqzArUg)
 * [Обучение, технологии и трудоустройство](https://www.youtube.com/watch?v=0Dt8yJq34tw)
