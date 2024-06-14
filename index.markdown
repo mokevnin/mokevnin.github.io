@@ -32,6 +32,8 @@ title: Мои материалы
 * [Эффективное тестирование фронтенда](https://youtu.be/e9DRhxRwsfU) (Podlodka Frontend Crew)
 * [Конечные автоматы как способ значительно упростить логику и понимание кода](https://www.youtube.com/watch?v=Yi2E1DIqoow&t=20041s) (KolesaConf)
 * [Разбор принципов программирования](https://youtu.be/OPa-ZVBtV0U?t=1873)
+* [История переписывания редактора Хекслета с JS на TS. Сложности, результаты и статистика](https://holyjs.ru/archive/2024%20Spring/talks/873f5ab998904ba08a8914b95c8dc6d5/?referer=%2Farchive%2F2024%2520Spring%2Fpersons%2F1ac5d28054cb4c6f8e59cfe884c28473%2F) (HolyJS)
+* [Автоматное программирование](https://techtrain.ru/talks/2e5b8d73a5ee486ab9d2fb1e67ca7981/?referer=%2Fpersons%2F979c0cb57eeb4fe781c3d7404c43caa6%2F) (TechTrain)
 
 
 ### Вебинары
@@ -54,3 +56,5 @@ title: Мои материалы
 * [Обучение программистов бесплатно за два часа без смс](https://devzen.ru/episode-0226/) (DevZen)
 * [Кирилл Мокевнин и Hexlet.io](https://podcasts.apple.com/ru/podcast/06-кирилл-мокевнин-и-hexlet-io/id1418009808?i=1000421270087) (// TODO FIXME)
 * [ Кирилл Мокевнин, Hexlet.io](https://podster.fm/podcasts/5minreact/e/179311/33-kirill-mokevnin-hexletio) (Пятиминутка React)
+* [Как выбрать курсы и стать программистом?](https://www.youtube.com/watch?si=JSUK6XX8YLWM6_gi&v=IFPY_VMRCQ4&feature=youtu.be)
+* [IT-сообщества: реальные возможности или модный тренд](https://www.youtube.com/watch?v=JQxbkqqGAOg)
