@@ -28,7 +28,7 @@ title: Мои материалы
 - [Как мы ушли от локальной разработки](https://www.youtube.com/watch?v=WVjz0HcAWOs) (TechLeadConf)
 - [Гарри Поттер и методы прагматичного программирования](https://www.youtube.com/watch?v=zrUwYBzb9zY) (TechLeadConf)
 - [Эффективное тестирование фронтенда](https://youtu.be/e9DRhxRwsfU) (Podlodka Frontend Crew)
-- [Конечные автоматы как способ значительно упростить логику и понимание кода](https://www.youtube.com/watch?v=Yi2E1DIqoow&t=20041s) (KolesaConf)
+- [Конечные автоматы как способ значительно упростить логику и понимание кода](https://youtu.be/knoVv2ncwVI) (KolesaConf)
 - [Разбор принципов программирования](https://youtu.be/OPa-ZVBtV0U?t=1873)
 - [История переписывания редактора Хекслета с JS на TS. Сложности, результаты и статистика](https://holyjs.ru/archive/2024%20Spring/talks/873f5ab998904ba08a8914b95c8dc6d5/?referer=%2Farchive%2F2024%2520Spring%2Fpersons%2F1ac5d28054cb4c6f8e59cfe884c28473%2F) (HolyJS)
 - [Автоматное программирование](https://techtrain.ru/talks/2e5b8d73a5ee486ab9d2fb1e67ca7981/?referer=%2Fpersons%2F979c0cb57eeb4fe781c3d7404c43caa6%2F) (TechTrain)
