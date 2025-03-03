@@ -48,7 +48,7 @@ title: Мои материалы
 - [Крутой продукт или маркетинг. Бум в EdTech. Пешеходная жизнь в США.](https://www.youtube.com/watch?app=desktop&v=ChlVgqzArUg)
 - [Обучение, технологии и трудоустройство](https://www.youtube.com/watch?v=0Dt8yJq34tw)
 - [Как обучать программистов правильно](https://www.youtube.com/watch?v=iM-gFlCLcLk)
-- [Чистый код – не значит правильный | Clean code, паттерны, лучшие практики](https://www.youtube.com/watch?v=3deXOXWlHeg) (Podlodka)
+- [Чистый код – не значит правильный. Clean code, паттерны, лучшие практики](https://www.youtube.com/watch?v=3deXOXWlHeg) (Podlodka)
 - [Обязательные знания для программиста](https://www.youtube.com/watch?v=GoAixzrElQc) (Podlodka)
 - [Продуктивность разработчика](https://www.youtube.com/watch?v=ajZD5IDD72M) (Podlodka)
 - [Обучение программистов бесплатно за два часа без смс](https://devzen.ru/episode-0226/) (DevZen)
