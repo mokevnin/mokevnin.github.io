@@ -8,7 +8,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 #
-# If you need help with YAML syntax, here are some quick references for you: 
+# If you need help with YAML syntax, here are some quick references for you:
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 #
@@ -26,10 +26,9 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 email: mokevnin@gmail.com
 twitter_username: mokevnin
-github_username:  mokevnin
-linkedin_username:  mokevnin
-youtube_username:  orgprog
-telegram_username:  orgprog
+github_username: mokevnin
+linkedin_username: mokevnin
+youtube_username: mokevnin
 
 # Build settings
 theme: minima
