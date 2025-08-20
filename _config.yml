@@ -23,12 +23,13 @@ description: |
   Ссылки на статьи, видео и другое
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-social:
-  email: mokevnin@gmail.com
-  twitter: mokevnin
-  github:  mokevnin
-  telegram: orgprog
-  youtube: orgprog
+
+email: mokevnin@gmail.com
+twitter_username: mokevnin
+github_username:  mokevnin
+linkedin_username:  mokevnin
+youtube_username:  orgprog
+telegram_username:  orgprog
 
 # Build settings
 theme: minima
