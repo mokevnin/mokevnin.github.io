@@ -1,2 +1,2 @@
-serve:
-	bundle exec jekyll serve --incremental
+# serve:
+# 	bundle exec jekyll serve --incremental
