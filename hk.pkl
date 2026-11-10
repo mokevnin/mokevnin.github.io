@@ -6,6 +6,7 @@ local fast = new Mapping<String, Step> {
     ["rumdl"] = Builtins.rumdl
     ["typos"] = Builtins.typos
     ["betterleaks"] = Builtins.betterleaks
+    ["jactionlint"] = Builtins.jactionlint
 }
 
 // Slower or network-bound: pre-push, `check` and CI.

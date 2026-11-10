@@ -1,0 +1,61 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  # Vulnerability data, external links and ignoreUntil dates change without a commit.
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Full history for the betterleaks history scan.
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Installs Ruby and the tools pinned in mise.toml, the same ones used locally.
+      - name: Setup mise
+        uses: jdx/mise-action@b44d12e7d0d8ee7461bb893e1b1993500433185b # v5.2.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore gem cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: vendor/bundle
+          key: gems-${{ runner.os }}-${{ hashFiles('mise.toml', 'Gemfile.lock') }}
+
+      - name: Restore lychee cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .lycheecache
+          key: lychee-${{ github.run_id }}
+          restore-keys: lychee-
+
+      - name: Install gems
+        run: bundle install
+
+      # rumdl, typos, betterleaks, lychee, OSV-Scanner, jactionlint and the Jekyll build, through hk.
+      - name: Run checks
+        run: mise run check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # hk scans the current files; this also catches a secret added and removed within the history.
+      - name: Scan git history for secrets
+        run: betterleaks git --redact --no-banner .

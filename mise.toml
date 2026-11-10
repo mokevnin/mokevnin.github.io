@@ -11,6 +11,7 @@ typos = "1.52.0"
 lychee = "0.24.2"
 betterleaks = "1.10.0"
 osv-scanner = "2.7.1"
+jactionlint = { version = "2.5.0", workflow = "release.yaml" }
 
 [env]
 BUNDLE_PATH = "vendor/bundle"
