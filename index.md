@@ -30,23 +30,39 @@
 - [Статьи на Habr](https://habr.com/ru/users/toxicmt/articles/)
 - [Статьи на VC](https://vc.ru/id14739)
 - [Как это работает: IT-индустрия и современные онлайн-школы](https://medium.com/funboxteam/как-это-работает-it-индустрия-и-современные-онлайн-школы-c84b6bf80813) (FunBoxTeam, расшифровка вебинара)
+- [Зачем учить людей программировать, если кодить самому выгоднее?](https://vc.ru/hr/567431-zachem-uchit-lyudey-programmirovat-esli-kodit-samomu-vygodnee-otvechaet-osnovatel-hekslet) (Консоль.Про, интервью)
+- [О новом мышлении в эпоху ИИ](https://livedigital.space/intervyu-hexlet) (livedigital, интервью)
 
 ### Конференции и Митапы
 
 - Ментальное программирование I (HappyDev, запись удалена)
 - [Ментальное программирование II](https://www.youtube.com/watch?v=vkUTX1hruF8) (DevConf)
 - [Ментальное программирование III](https://www.youtube.com/watch?v=JnURhIf194s) (Secon)
+- [Развитие IT-среды. Опыт Ульяновска](https://www.youtube.com/watch?v=5PHwuCmP5E8) (Secon, вместе с Львом Валкиным)
+- [Круглый стол «IT-образование и бизнес»](https://www.youtube.com/watch?v=ff_WTCQ7FwU) (Secon)
 - [Почему сложно программировать UI](https://www.youtube.com/watch?v=DCeNCr2tKOI) (FrontHub)
 - [Формирование инженерной культуры](https://www.youtube.com/watch?v=W7GlELjRODw) (AgileDays)
+- [Обучение, которое работает](https://www.youtube.com/watch?v=GnUqjO_60Yk) (Ulcamp)
+- Начинаем писать тесты (правильно) (FrontHub, без записи)
+- [Инженерная культура](https://www.youtube.com/watch?v=nh3flmftHk4) (KazanJS)
 - [Архитектура должна быть скучной](https://www.youtube.com/watch?v=NbMt4uFIL8c) (RailsRussia)
 - [От фабрик к фикстурам](https://www.youtube.com/watch?v=whJ-6PKqGOc) (RubyRussia)
 - [Как мы ушли от локальной разработки](https://www.youtube.com/watch?v=WVjz0HcAWOs) (TechLeadConf)
 - [Гарри Поттер и методы прагматичного программирования](https://www.youtube.com/watch?v=zrUwYBzb9zY) (TechLeadConf)
 - [Эффективное тестирование фронтенда](https://youtu.be/e9DRhxRwsfU) (Podlodka Frontend Crew)
+- [Круглый стол «Что такое архитектура фронтенда?»](https://www.youtube.com/watch?v=3XlHo3kw1PU) (Podlodka Frontend Crew)
+- [Круглый стол «Качество и стабильность»](https://www.youtube.com/watch?v=yumnasnGoyY) (Podlodka Frontend Crew)
 - [Конечные автоматы как способ значительно упростить логику и понимание кода](https://youtu.be/knoVv2ncwVI) (KolesaConf)
 - [Разбор принципов программирования](https://youtu.be/OPa-ZVBtV0U?t=1873)
 - [История переписывания редактора Хекслета с JS на TS. Сложности, результаты и статистика](https://holyjs.ru/archive/2024%20Spring/talks/20004610-the-story-of-rewriting-the-hexlet-editor-from-js-to-ts-difficulties-results-and-statistics/) (HolyJS)
 - [Автоматное программирование](https://techtrain.ru/talks/20004500/) (TechTrain)
+- [5 проектов выходного дня, которые значительно повысят ваши навыки кодинга](https://www.youtube.com/watch?v=X1GsnskqQ14) (CodeFest)
+- [Как сделать проект понятным для AI-агентов](https://highload.ru/spb/2026/abstracts/18373) (воркшоп на Saint HighLoad++, [мастер-класс](https://teamleadconf.ru/spb/2026/abstracts/18335) на Saint TeamLead Conf и [доклад](https://proitfest.ru/proit-summer-fest-11-july-2026/) на ProIT Fest)
+- [Легитимизация AI на собеседованиях](https://proitfest.ru/proit-summer-fest-11-july-2026/) (ProIT Fest, дебаты с Михаилом Головатым)
+- [Как подготовить проект и окружение к агентной разработке](https://www.youtube.com/watch?v=lqfrYlMMaA8) (Agentic Dev Conf)
+- [Ментальное программирование IV](https://2026.ulcamp.ru/programs) (Ulcamp)
+- [О новых ролях в эпоху AI](https://www.youtube.com/watch?v=CTg6hQ0unx8) (Podlodka Frontend Crew, открытая сессия)
+- [Внедряем AI в легаси-проект: пошаговый план](https://ai-dev.live/#d2-04) (AI Dev Live)
 
 ### Вебинары и Подкасты
 
@@ -68,6 +84,18 @@
 - [Как выбрать курсы и стать программистом?](https://www.youtube.com/watch?v=IFPY_VMRCQ4)
 - [IT-сообщества: реальные возможности или модный тренд](https://www.youtube.com/watch?v=JQxbkqqGAOg)
 - [A-players: кто такие и почему они нужны команде?](https://kodakoda.mave.digital/ep-89)
+- [Сооснователь образовательной онлайн-платформы](https://www.youtube.com/watch?v=wSmT1gyMwdk) (Работник месяца)
+- [System Design, глава 16: The learning continues](https://www.youtube.com/watch?v=7DRRZHdUBls) ({ между скобок })
+- [Junior-разработчики: обучение программированию, тестовое задание](https://www.youtube.com/watch?v=qRWPp6sU6Vo) (Podlodka)
+- [Топ-5 страхов и проблем ИТ-индустрии](https://www.youtube.com/watch?v=s1VUcFMDBRo) (Podlodka #400, один из экспертов)
+- [Топ 10 языков программирования в 2024 году по деньгам и популярности](https://www.youtube.com/watch?v=40QghvScTew) (Мы обречены)
+- [PHP-линч #26: Laravel](https://www.youtube.com/watch?v=KpSfWe7XS3A) (Пых)
+- [Как проходить технические собеседования](https://www.youtube.com/watch?v=6FXLzctHGRM) (Хекслет и Хабр Карьера)
+- [Сила инженерного подхода, кризис EdTech и «Организованное программирование»](https://www.youtube.com/watch?v=71woGzow-2w) (Weekend Talk)
+- [Закапываюсь в нюансы, пока кандидат не поплывёт — собесы Кирилла Мокевнина](https://www.youtube.com/watch?v=jVjutIlBLLQ) (Разрабы)
+- [Ruby on Rails в 2026: скорость, магия и боль рельсов](https://www.youtube.com/watch?v=EL53I0klc2w) (Podlodka)
+- [Что случилось с Hexlet](https://www.youtube.com/watch?v=EQSzqxqgi50) (Большие цифры)
+- [«Выучу, когда понадобится»: почему это не работает](https://www.youtube.com/watch?v=A4jSCCpt12o) (Go Get Podcast)
 
 ## Карьерный путь
 
