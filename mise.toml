@@ -1,0 +1,21 @@
+# One toolchain for developers, git hooks and CI: `mise install`, then `mise run setup`.
+min_version = "2026.11.5"
+
+[tools]
+# GitHub Pages builds this site with Ruby 3.3 and the github-pages gem; match it locally.
+ruby = "3.3.13"
+
+[env]
+BUNDLE_PATH = "vendor/bundle"
+
+[tasks.setup]
+description = "Install gems"
+run = "bundle install"
+
+[tasks.serve]
+description = "Serve the site locally with live reload"
+run = "bundle exec jekyll serve --livereload"
+
+[tasks.build]
+description = "Build the site the way GitHub Pages does"
+run = "bundle exec jekyll build"
