@@ -8,6 +8,9 @@ hk = "2.11.1"
 pkl = "0.33.0"
 rumdl = "0.3.2"
 typos = "1.52.0"
+lychee = "0.24.2"
+betterleaks = "1.10.0"
+osv-scanner = "2.7.1"
 
 [env]
 BUNDLE_PATH = "vendor/bundle"

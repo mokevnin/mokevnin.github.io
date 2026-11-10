@@ -1,13 +1,25 @@
 amends "package://github.com/jdx/hk/releases/download/v2.11.1/hk@2.11.1#/Config.pkl"
 import "package://github.com/jdx/hk/releases/download/v2.11.1/hk@2.11.1#/Builtins.pkl"
 
-// Fast checks on staged files at commit; `check`, pre-push and CI run everything.
+// Fast, offline checks on staged files at commit.
 local fast = new Mapping<String, Step> {
     ["rumdl"] = Builtins.rumdl
     ["typos"] = Builtins.typos
+    ["betterleaks"] = Builtins.betterleaks
 }
 
-local all = (fast) {}
+// Slower or network-bound: pre-push, `check` and CI.
+local all = (fast) {
+    ["lychee"] {
+        glob = List("**/*.md")
+        check = "lychee --config lychee.toml --no-progress {{ files }}"
+    }
+    ["osv-scanner"] = Builtins.osv_scanner
+    ["jekyll"] {
+        glob = List("_config.yml", "*.md", "_*/**", "assets/**", "Gemfile", "Gemfile.lock")
+        check = "bundle exec jekyll build --quiet"
+    }
+}
 
 hooks {
     ["pre-commit"] {
