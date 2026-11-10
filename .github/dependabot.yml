@@ -1,0 +1,9 @@
+version: 2
+updates:
+  # Gems are not listed: github-pages pins them to what GitHub Pages runs, see Gemfile.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
