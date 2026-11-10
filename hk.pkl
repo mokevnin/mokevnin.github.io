@@ -1,0 +1,28 @@
+amends "package://github.com/jdx/hk/releases/download/v2.11.1/hk@2.11.1#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.11.1/hk@2.11.1#/Builtins.pkl"
+
+// Fast checks on staged files at commit; `check`, pre-push and CI run everything.
+local fast = new Mapping<String, Step> {
+    ["rumdl"] = Builtins.rumdl
+    ["typos"] = Builtins.typos
+}
+
+local all = (fast) {}
+
+hooks {
+    ["pre-commit"] {
+        fix = true
+        stash = "git"
+        steps = fast
+    }
+    ["pre-push"] {
+        steps = all
+    }
+    ["check"] {
+        steps = all
+    }
+    ["fix"] {
+        fix = true
+        steps = all
+    }
+}
