@@ -1,6 +1,0 @@
-[[IgnoredVulns]]
-id = "GHSA-47m2-wp7j-p9vc"
-effectiveUntil = 2027-02-10
-reason = """rubyzip path traversal on extraction. github-pages 232 pins it below 3.0 through \
-jekyll-remote-theme, which only unzips remote themes; this site uses the local minima theme. \
-Re-check when pages.github.com/versions.json moves past github-pages 232."""

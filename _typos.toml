@@ -1,6 +1,3 @@
 [default.extend-words]
 # Conference name (SECON), not a misspelling of "second".
 Secon = "Secon"
-
-[files]
-extend-exclude = ["Gemfile.lock"]

@@ -1,3 +1,3 @@
-# Prose is not wrapped, and index.md starts with a paragraph: the theme renders the page title.
+# Prose is not wrapped.
 [global]
-disable = ["MD013", "MD041"]
+disable = ["MD013"]

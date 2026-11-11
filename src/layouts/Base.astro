@@ -1,0 +1,66 @@
+---
+import { site } from "../site";
+import "../styles/global.css";
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const title = `${site.title} | ${site.description}`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.title,
+  headline: site.title,
+  description: site.description,
+  url: canonical,
+  author: { "@type": "Person", name: site.author },
+};
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={site.description} />
+    <meta name="author" content={site.author} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru" />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-page font-sans text-base/normal text-ink antialiased">
+    <header class="border-t-4 border-b border-t-accent border-b-line">
+      <div class="mx-auto max-w-[880px] px-4 py-4 sm:px-8">
+        <a class="text-lg font-light tracking-tight text-muted hover:text-accent hover:no-underline" href="/">{site.title}</a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-[880px] px-4 py-8 sm:px-8">
+      <slot />
+    </main>
+
+    <footer class="border-t border-line text-sm text-muted">
+      <div class="mx-auto grid max-w-[880px] gap-6 px-4 py-8 sm:grid-cols-3 sm:px-8">
+        <ul>
+          <li>{site.author}</li>
+          <li><a class="text-muted hover:text-accent" href={`mailto:${site.email}`}>{site.email}</a></li>
+        </ul>
+        <ul>
+          {
+            site.links.map((link) => (
+              <li>
+                <a class="text-muted hover:text-accent" href={link.url}>{link.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <p>{site.description}</p>
+      </div>
+    </footer>
+  </body>
+</html>

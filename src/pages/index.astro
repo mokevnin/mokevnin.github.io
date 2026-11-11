@@ -1,0 +1,85 @@
+---
+import Archive from "../components/Archive.astro";
+import Cards from "../components/Cards.astro";
+import Note from "../components/Note.astro";
+import Pills from "../components/Pills.astro";
+import Section from "../components/Section.astro";
+import SectionNav from "../components/SectionNav.astro";
+import Timeline from "../components/Timeline.astro";
+import { data } from "../data";
+import Base from "../layouts/Base.astro";
+import { site } from "../site";
+
+// The ids match the anchors of the previous Jekyll site, so links to sections keep working.
+const sections = {
+  projects: { id: "проекты", title: "Проекты" },
+  openSource: { id: "open-source", title: "Open Source" },
+  orgprog: { id: "организованное-программирование", title: "Организованное программирование" },
+  texts: { id: "тексты", title: "Тексты" },
+  talks: { id: "выступления", title: "Выступления" },
+  podcasts: { id: "вебинары-и-подкасты", title: "Вебинары и подкасты" },
+  career: { id: "карьерный-путь", title: "Карьерный путь" },
+};
+---
+
+<Base>
+  <header class="mt-4 mb-5 flex items-center gap-4 sm:gap-6">
+    <img
+      class="size-20 flex-none rounded-full shadow-[0_0_0_4px_var(--color-surface),0_0_0_5px_var(--color-line)] sm:size-[120px]"
+      src={`https://github.com/${site.github}.png?size=240`}
+      alt=""
+      width="120"
+      height="120"
+    />
+    <h1 class="text-[30px]/[1.1] font-bold tracking-[-0.02em] sm:text-[40px]/[1.1]">{site.author}</h1>
+  </header>
+
+  <p class="mb-4 text-[17px]/relaxed sm:text-[19px]/relaxed">
+    Привет, меня зовут Кирилл Мокевнин, разработчик и со-основатель школы программирования Хекслет. Я пишу
+    статьи, делаю курсы и выступаю на конференциях. Веду подкаст и телеграм-канал «Организованное
+    программирование» про инженерную культуру и практику разработки. Сейчас много занимаюсь агентной
+    разработкой: помогаю командам внедрять AI-агентов в процесс разработки и пишу open-source инструменты для
+    этого. На этом сайте собрана информация обо мне и всех моих активностях.
+  </p>
+
+  <SectionNav sections={Object.values(sections)} />
+
+  <Section {...sections.projects}>
+    <Cards items={data.projects} />
+  </Section>
+
+  <Section {...sections.openSource}>
+    <Cards items={data.openSource} compact />
+  </Section>
+
+  <Section {...sections.orgprog}>
+    <Note>Подкаст и телеграм-канал про инженерную культуру и практику разработки.</Note>
+    <Pills items={data.orgprog} />
+  </Section>
+
+  <Section {...sections.texts}>
+    <Pills items={data.textLinks} />
+    <Note>Отдельные статьи и интервью:</Note>
+    <Archive items={data.articles} />
+  </Section>
+
+  <Section {...sections.talks}>
+    <Note>Конференции и митапы, от новых к старым.</Note>
+    <Archive items={data.talks} />
+  </Section>
+
+  <Section {...sections.podcasts}>
+    <Archive items={data.podcasts} />
+  </Section>
+
+  <Section {...sections.career}>
+    <p class="mb-4">
+      В коммерческой разработке я с 2007 года. Основной фокус — веб-разработка во всём её спектре: от бэкенда и
+      фронтенда до инфраструктуры и процессов (DevOps, CI/CD, организация командной работы). Прошел путь от
+      разработчика, тимлида и СТО до VP of Engineering. Со временем всё больше внимания уделяю не только
+      написанию кода, но и обучению разработчиков и формированию инженерной культуры. С 2015 года полностью
+      переключился на Хекслет и продолжаю заниматься примерно тем же, но уже работая на себя.
+    </p>
+    <Timeline items={data.career} />
+  </Section>
+</Base>

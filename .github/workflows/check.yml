@@ -28,17 +28,17 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      # Installs Ruby and the tools pinned in mise.toml, the same ones used locally.
+      # Installs Node and the tools pinned in mise.toml, the same ones used locally.
       - name: Setup mise
         uses: jdx/mise-action@b44d12e7d0d8ee7461bb893e1b1993500433185b # v5.2.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Restore gem cache
+      - name: Restore npm cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          path: vendor/bundle
-          key: gems-${{ runner.os }}-${{ hashFiles('mise.toml', 'Gemfile.lock') }}
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('mise.toml', 'package-lock.json') }}
 
       - name: Restore lychee cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -47,10 +47,10 @@ jobs:
           key: lychee-${{ github.run_id }}
           restore-keys: lychee-
 
-      - name: Install gems
-        run: bundle install
+      - name: Install npm packages
+        run: npm ci
 
-      # rumdl, typos, betterleaks, lychee, OSV-Scanner, jactionlint and the Jekyll build, through hk.
+      # rumdl, typos, betterleaks, jactionlint, astro check, the build, lychee and OSV-Scanner, through hk.
       - name: Run checks
         run: mise run check
         env:
