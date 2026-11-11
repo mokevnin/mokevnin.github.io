@@ -20,6 +20,7 @@ const card = z.strictObject({
   name: z.string(),
   url,
   description: z.string(), // inline Markdown
+  tag: z.string().optional(), // e.g. the language of a repository
 });
 
 const link = z.strictObject({

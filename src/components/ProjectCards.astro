@@ -1,0 +1,37 @@
+---
+import { type Card, md } from "../data";
+
+interface Props {
+  items: Card[];
+}
+
+const { items } = Astro.props;
+---
+
+<!--
+  The whole card is clickable: the name's link stretches over it with ::after, and links inside the
+  description sit above that layer, so they still open their own targets.
+-->
+<ul class="grid gap-4 sm:grid-cols-2">
+  {
+    items.map((item) => (
+      <li class="group relative rounded-2xl border border-line bg-surface p-5 transition hover:border-accent/50 hover:shadow-[0_8px_24px_-12px_rgb(0_0_0/0.15)]">
+        <h3 class="flex items-center gap-1.5 text-lg font-semibold tracking-tight">
+          <a class="text-ink after:absolute after:inset-0 after:rounded-2xl hover:no-underline" href={item.url}>
+            {item.name}
+          </a>
+          <span
+            aria-hidden="true"
+            class="text-muted transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+          >
+            ↗
+          </span>
+        </h3>
+        <p
+          class="mt-2 text-[15px]/relaxed text-muted first-letter:uppercase [&_a]:relative [&_a]:z-10"
+          set:html={md(item.description)}
+        />
+      </li>
+    ))
+  }
+</ul>

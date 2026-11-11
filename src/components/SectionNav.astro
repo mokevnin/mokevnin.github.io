@@ -1,31 +1,46 @@
 ---
 interface Props {
-  sections: { id: string; title: string }[];
+  sections: { id: string; title: string; number: string }[];
+  // "column": the list in the desktop sidebar. "bar": the sticky row above the content on narrow screens.
+  variant: "column" | "bar";
 }
 
-const { sections } = Astro.props;
+const { sections, variant } = Astro.props;
 ---
 
-<!--
-  Sticky bar of section links; the nav itself is sticky, so it sticks within the whole <main>. The shadow paints the background edge to edge, so content scrolling
-  under the bar does not show at its sides. On a phone it is one scrollable row.
--->
-<nav
-  aria-label="Разделы"
-  class="sticky top-0 z-10 mt-7 mb-2 border-b border-line bg-page py-2.5 shadow-[0_0_0_100vmax_var(--color-page)] [clip-path:inset(0_-100vmax)]"
->
-  <ul class="flex flex-nowrap gap-1 overflow-x-auto [scrollbar-width:none] sm:flex-wrap sm:overflow-visible">
-    {
-      sections.map((section) => (
-        <li class="flex-none">
-          <a
-            class="block rounded-full px-3 py-1 text-sm whitespace-nowrap text-muted hover:bg-accent-soft hover:text-accent hover:no-underline"
-            href={`#${section.id}`}
-          >
-            {section.title}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</nav>
+{
+  variant === "column" ? (
+    <nav aria-label="Разделы" class="hidden lg:block">
+      <ul class="space-y-1">
+        {sections.map((section) => (
+          <li>
+            <a
+              class="group flex items-center gap-3 py-1 text-sm text-muted hover:text-ink hover:no-underline"
+              href={`#${section.id}`}
+            >
+              <span class="font-mono text-xs">{section.number}</span>
+              <span class="h-px w-6 bg-line transition-all group-hover:w-12 group-hover:bg-ink" />
+              {section.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  ) : (
+    // Bleeds to the screen edges so content scrolling under the bar does not show at its sides.
+    <nav aria-label="Разделы" class="sticky top-0 z-10 -mx-5 border-b border-line bg-page/95 px-5 backdrop-blur sm:-mx-8 sm:px-8 lg:hidden">
+      <ul class="flex gap-1 overflow-x-auto py-2.5 [scrollbar-width:none]">
+        {sections.map((section) => (
+          <li class="flex-none">
+            <a
+              class="block rounded-full px-3 py-1 text-sm whitespace-nowrap text-muted hover:bg-accent-soft hover:text-accent hover:no-underline"
+              href={`#${section.id}`}
+            >
+              {section.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

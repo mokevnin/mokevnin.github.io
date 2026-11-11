@@ -2,13 +2,17 @@
 interface Props {
   id: string;
   title: string;
+  number: string;
 }
 
-const { id, title } = Astro.props;
+const { id, title, number } = Astro.props;
 ---
 
-<section>
-  <!-- scroll-mt keeps the heading clear of the sticky section nav after an anchor jump. -->
-  <h2 id={id} class="mt-14 mb-4 scroll-mt-[110px] text-[26px] font-bold tracking-[-0.01em]">{title}</h2>
+<section class="pt-16 sm:pt-20">
+  <!-- scroll-mt keeps the heading clear of the sticky bar on narrow screens after an anchor jump. -->
+  <h2 id={id} class="mb-6 flex scroll-mt-20 items-baseline gap-3 text-2xl font-semibold tracking-tight lg:scroll-mt-12">
+    <span class="font-mono text-sm font-normal text-accent">{number}</span>
+    {title}
+  </h2>
   <slot />
 </section>

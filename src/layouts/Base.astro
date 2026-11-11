@@ -41,7 +41,7 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="motion-safe:scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,8 +52,8 @@ const jsonLd = {
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/png" href={favicon.src} />
     <link rel="apple-touch-icon" href={touchIcon.src} />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbfa" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121417" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0e0d" />
 
     <meta property="og:type" content="profile" />
     <meta property="og:locale" content="ru_RU" />
@@ -73,35 +73,6 @@ const jsonLd = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="bg-page font-sans text-base/normal text-ink antialiased">
-    <header class="border-t-4 border-b border-t-accent border-b-line">
-      <div class="mx-auto max-w-[880px] px-4 py-4 sm:px-8">
-        <a class="text-lg font-light tracking-tight text-muted hover:text-accent hover:no-underline" href="/">{site.name}</a>
-      </div>
-    </header>
-
-    <main class="mx-auto max-w-[880px] px-4 py-8 sm:px-8">
-      <slot />
-    </main>
-
-    <footer class="border-t border-line text-sm text-muted">
-      <div class="mx-auto grid max-w-[880px] gap-6 px-4 py-8 sm:grid-cols-3 sm:px-8">
-        <ul>
-          <li>{site.author}</li>
-          <li><a class="text-muted hover:text-accent" href={`mailto:${site.email}`}>{site.email}</a></li>
-        </ul>
-        <ul>
-          {
-            site.links.map((link) => (
-              <li>
-                <a class="text-muted hover:text-accent" href={link.url} rel="me">
-                  {link.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-        <p>Ссылки на статьи, видео и другое</p>
-      </div>
-    </footer>
+    <slot />
   </body>
 </html>

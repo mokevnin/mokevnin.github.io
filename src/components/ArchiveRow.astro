@@ -1,0 +1,21 @@
+---
+import { type Entry, md } from "../data";
+
+interface Props {
+  item: Entry;
+}
+
+const { item } = Astro.props;
+---
+
+<li class="py-3 sm:flex sm:items-baseline sm:justify-between sm:gap-8">
+  <span>{item.url ? <a class="text-ink decoration-accent/50 hover:text-accent" href={item.url}>{item.title}</a> : item.title}</span>
+  {
+    item.venue && (
+      <span
+        class="mt-0.5 block font-mono text-xs/relaxed text-muted sm:mt-0 sm:max-w-[45%] sm:flex-none sm:text-right [&_a]:text-muted [&_a]:underline"
+        set:html={md(item.venue)}
+      />
+    )
+  }
+</li>
