@@ -1,25 +1,36 @@
 ---
-import { type Entry, md } from "../data";
+import type { Entry } from "../data";
+import ArchiveRow from "./ArchiveRow.astro";
 
 interface Props {
   items: Entry[];
+  // How many entries show before the rest fold under "show all"; <details> needs no JavaScript.
+  visible?: number;
 }
 
-const { items } = Astro.props;
+const { items, visible = items.length } = Astro.props;
+const shown = items.slice(0, visible);
+const folded = items.slice(visible);
 ---
 
-<ul class="mb-4">
-  {
-    items.map((item) => (
-      <li class="border-b border-line py-2.5 last:border-b-0">
-        {item.url ? <a href={item.url}>{item.title}</a> : item.title}
-        {item.venue && (
-          <>
-            {" — "}
-            <span class="text-sm text-muted [&_a]:text-muted [&_a]:underline" set:html={md(item.venue)} />
-          </>
-        )}
-      </li>
-    ))
-  }
+<ul class="divide-y divide-line border-y border-line">
+  {shown.map((item) => <ArchiveRow item={item} />)}
 </ul>
+{
+  folded.length > 0 && (
+    <details class="group">
+      <summary class="mt-3 inline-flex cursor-pointer list-none items-center gap-2 font-mono text-sm text-accent select-none hover:underline [&::-webkit-details-marker]:hidden">
+        <span class="group-open:hidden">Показать все ({items.length})</span>
+        <span class="hidden group-open:inline">Свернуть</span>
+        <span aria-hidden="true" class="transition group-open:rotate-180">
+          ↓
+        </span>
+      </summary>
+      <ul class="mt-3 divide-y divide-line border-y border-line">
+        {folded.map((item) => (
+          <ArchiveRow item={item} />
+        ))}
+      </ul>
+    </details>
+  )
+}

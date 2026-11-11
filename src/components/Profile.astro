@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import avatar from "../assets/avatar.jpg";
+import { site } from "../site";
+---
+
+<header>
+  <Image
+    class="size-20 rounded-full ring-1 ring-line"
+    src={avatar}
+    alt=""
+    width={80}
+    height={80}
+    densities={[1, 2]}
+    loading="eager"
+  />
+  <h1 class="mt-6 text-4xl/[1.05] font-bold tracking-[-0.03em] sm:text-5xl/[1.05]">{site.author}</h1>
+  <p class="mt-4 text-lg/snug text-muted">{site.jobTitle}</p>
+  <ul class="mt-6 flex flex-wrap gap-x-4 gap-y-1 font-mono text-sm">
+    {
+      site.links.map((link) => (
+        <li>
+          <a class="text-muted hover:text-ink hover:no-underline" href={link.url} rel="me">
+            {link.title}
+          </a>
+        </li>
+      ))
+    }
+    <li>
+      <a class="text-muted hover:text-ink hover:no-underline" href={`mailto:${site.email}`}>Почта</a>
+    </li>
+  </ul>
+</header>

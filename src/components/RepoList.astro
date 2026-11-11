@@ -1,0 +1,31 @@
+---
+import { type Card, md } from "../data";
+
+interface Props {
+  items: Card[];
+}
+
+const { items } = Astro.props;
+---
+
+<!-- Rows are clickable like the project cards; links in a description stay on top. -->
+<ul class="divide-y divide-line border-y border-line">
+  {
+    items.map((item) => (
+      <li class="group relative grid gap-1 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
+        <a
+          class="font-mono text-[15px] font-medium text-ink after:absolute after:inset-0 group-hover:text-accent hover:no-underline"
+          href={item.url}
+        >
+          {item.name}
+        </a>
+        <div class="text-[15px]/relaxed text-muted">
+          <p class="first-letter:uppercase [&_a]:relative [&_a]:z-10" set:html={md(item.description)} />
+          {item.tag && (
+            <span class="mt-2 inline-block rounded-full border border-line px-2 py-0.5 font-mono text-xs">{item.tag}</span>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ul>

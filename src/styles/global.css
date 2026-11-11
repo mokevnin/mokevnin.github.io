@@ -1,37 +1,46 @@
 @import "tailwindcss";
+@import "@fontsource-variable/onest";
+@import "@fontsource-variable/jetbrains-mono";
 
 /* Colors are theme variables, so utilities like text-ink or bg-accent-soft exist
-   and the dark scheme only swaps the values. */
+   and the dark scheme only swaps the values. Every text color pair is at least 4.5:1. */
 @theme {
-  --color-ink: #1d2127;
-  --color-muted: #6b7280;
-  --color-page: #fbfbfa;
+  --font-sans: "Onest Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-page: #faf9f7;
   --color-surface: #fff;
-  --color-line: #e5e7eb;
-  --color-accent: #2f5bd3;
-  --color-accent-soft: #edf2fd;
+  --color-ink: #1c1917;
+  --color-muted: #6b645d;
+  --color-line: #e7e3df;
+  --color-accent: #c2410c;
+  --color-accent-soft: #fdeee3;
 }
 
 @layer base {
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-ink: #e6e8eb;
-      --color-muted: #9ca3af;
-      --color-page: #121417;
-      --color-surface: #1b1e23;
-      --color-line: #2c3038;
-      --color-accent: #8ab0ff;
-      --color-accent-soft: #1d2638;
+      --color-page: #0f0e0d;
+      --color-surface: #1a1817;
+      --color-ink: #f2f0ee;
+      --color-muted: #a39e98;
+      --color-line: #2a2725;
+      --color-accent: #fb8f55;
+      --color-accent-soft: #2e1d13;
     }
+  }
+
+  ::selection {
+    @apply bg-accent-soft text-ink;
   }
 
   /* Defaults for links and code, including those rendered from inline Markdown in src/data.
      Components override them with utilities. */
   a {
-    @apply text-accent hover:underline;
+    @apply text-accent underline-offset-4 hover:underline;
   }
 
   code {
-    @apply rounded border border-line bg-accent-soft px-1 font-mono text-[0.9em];
+    @apply rounded border border-line bg-surface px-1 font-mono text-[0.85em];
   }
 }

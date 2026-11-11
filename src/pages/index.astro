@@ -1,89 +1,101 @@
 ---
-import { Image } from "astro:assets";
 import Archive from "../components/Archive.astro";
-import Cards from "../components/Cards.astro";
-import Note from "../components/Note.astro";
-import Pills from "../components/Pills.astro";
+import LinkButtons from "../components/LinkButtons.astro";
+import Profile from "../components/Profile.astro";
+import ProjectCards from "../components/ProjectCards.astro";
+import RepoList from "../components/RepoList.astro";
 import Section from "../components/Section.astro";
 import SectionNav from "../components/SectionNav.astro";
 import Timeline from "../components/Timeline.astro";
 import { data } from "../data";
 import Base from "../layouts/Base.astro";
-import avatar from "../assets/avatar.jpg";
 import { site } from "../site";
 
-// The ids match the anchors of the previous Jekyll site, so links to sections keep working.
-const sections = {
-  projects: { id: "проекты", title: "Проекты" },
-  openSource: { id: "open-source", title: "Open Source" },
-  orgprog: { id: "организованное-программирование", title: "Организованное программирование" },
-  texts: { id: "тексты", title: "Тексты" },
-  talks: { id: "выступления", title: "Выступления" },
-  podcasts: { id: "вебинары-и-подкасты", title: "Вебинары и подкасты" },
-  career: { id: "карьерный-путь", title: "Карьерный путь" },
-};
+// The ids match the anchors of the previous site, so links to sections keep working.
+const sectionList = [
+  { key: "projects", id: "проекты", title: "Проекты" },
+  { key: "openSource", id: "open-source", title: "Open Source" },
+  { key: "orgprog", id: "организованное-программирование", title: "Организованное программирование" },
+  { key: "texts", id: "тексты", title: "Тексты" },
+  { key: "talks", id: "выступления", title: "Выступления" },
+  { key: "podcasts", id: "вебинары-и-подкасты", title: "Вебинары и подкасты" },
+  { key: "career", id: "карьерный-путь", title: "Карьерный путь" },
+].map((section, index) => ({ ...section, number: String(index + 1).padStart(2, "0") }));
+const sections = Object.fromEntries(sectionList.map(({ key, ...section }) => [key, section]));
+
+// Long lists show this many entries before folding the rest.
+const visibleEntries = 8;
 ---
 
 <Base>
-  <header class="mt-4 mb-5 flex items-center gap-4 sm:gap-6">
-    <Image
-      class="size-20 flex-none rounded-full shadow-[0_0_0_4px_var(--color-surface),0_0_0_5px_var(--color-line)] sm:size-[120px]"
-      src={avatar}
-      alt=""
-      width={120}
-      height={120}
-      densities={[1, 2]}
-      loading="eager"
-    />
-    <h1 class="text-[30px]/[1.1] font-bold tracking-[-0.02em] sm:text-[40px]/[1.1]">{site.author}</h1>
-  </header>
+  <div class="mx-auto max-w-6xl px-5 sm:px-8 lg:flex lg:gap-20 lg:px-12">
+    <!--
+      On wide screens the profile and the section list stay in view. self-start keeps the column
+      from stretching to the row's height, which would stop it from sticking.
+    -->
+    <aside
+      class="pt-12 pb-8 lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:w-80 lg:flex-none lg:flex-col lg:gap-12 lg:self-start lg:overflow-y-auto lg:py-16"
+    >
+      <Profile />
+      <SectionNav sections={sectionList} variant="column" />
+    </aside>
 
-  <p class="mb-4 text-[17px]/relaxed sm:text-[19px]/relaxed">
-    Привет, меня зовут Кирилл Мокевнин, разработчик и со-основатель школы программирования Хекслет. Я пишу
-    статьи, делаю курсы и выступаю на конференциях. Веду подкаст и телеграм-канал «Организованное
-    программирование» про инженерную культуру и практику разработки. Сейчас много занимаюсь агентной
-    разработкой: помогаю командам внедрять AI-агентов в процесс разработки и пишу open-source инструменты для
-    этого. На этом сайте собрана информация обо мне и всех моих активностях.
-  </p>
+    <div class="min-w-0 flex-1 lg:py-16">
+      <SectionNav sections={sectionList} variant="bar" />
 
-  <SectionNav sections={Object.values(sections)} />
+      <p class="pt-8 text-lg/relaxed text-ink lg:pt-0 lg:text-xl/relaxed">
+        Привет, меня зовут Кирилл Мокевнин, разработчик и со-основатель школы программирования Хекслет. Я пишу
+        статьи, делаю курсы и выступаю на конференциях. Веду подкаст и телеграм-канал «Организованное
+        программирование» про инженерную культуру и практику разработки. Сейчас много занимаюсь агентной
+        разработкой: помогаю командам внедрять AI-агентов в процесс разработки и пишу open-source инструменты для
+        этого. На этом сайте собрана информация обо мне и всех моих активностях.
+      </p>
 
-  <Section {...sections.projects}>
-    <Cards items={data.projects} />
-  </Section>
+      <Section {...sections.projects}>
+        <ProjectCards items={data.projects} />
+      </Section>
 
-  <Section {...sections.openSource}>
-    <Cards items={data.openSource} compact />
-  </Section>
+      <Section {...sections.openSource}>
+        <RepoList items={data.openSource} />
+      </Section>
 
-  <Section {...sections.orgprog}>
-    <Note>Подкаст и телеграм-канал про инженерную культуру и практику разработки.</Note>
-    <Pills items={data.orgprog} />
-  </Section>
+      <Section {...sections.orgprog}>
+        <div class="rounded-2xl bg-accent-soft p-6 sm:p-8">
+          <p class="mb-5 text-lg/relaxed">Подкаст и телеграм-канал про инженерную культуру и практику разработки.</p>
+          <LinkButtons items={data.orgprog} primaryFirst />
+        </div>
+      </Section>
 
-  <Section {...sections.texts}>
-    <Pills items={data.textLinks} />
-    <Note>Отдельные статьи и интервью:</Note>
-    <Archive items={data.articles} />
-  </Section>
+      <Section {...sections.texts}>
+        <LinkButtons items={data.textLinks} />
+        <p class="mt-8 mb-3 text-muted">Отдельные статьи и интервью:</p>
+        <Archive items={data.articles} />
+      </Section>
 
-  <Section {...sections.talks}>
-    <Note>Конференции и митапы, от новых к старым.</Note>
-    <Archive items={data.talks} />
-  </Section>
+      <Section {...sections.talks}>
+        <p class="mb-3 text-muted">Конференции и митапы, от новых к старым.</p>
+        <Archive items={data.talks} visible={visibleEntries} />
+      </Section>
 
-  <Section {...sections.podcasts}>
-    <Archive items={data.podcasts} />
-  </Section>
+      <Section {...sections.podcasts}>
+        <Archive items={data.podcasts} visible={visibleEntries} />
+      </Section>
 
-  <Section {...sections.career}>
-    <p class="mb-4">
-      В коммерческой разработке я с 2007 года. Основной фокус — веб-разработка во всём её спектре: от бэкенда и
-      фронтенда до инфраструктуры и процессов (DevOps, CI/CD, организация командной работы). Прошел путь от
-      разработчика, тимлида и СТО до VP of Engineering. Со временем всё больше внимания уделяю не только
-      написанию кода, но и обучению разработчиков и формированию инженерной культуры. С 2015 года полностью
-      переключился на Хекслет и продолжаю заниматься примерно тем же, но уже работая на себя.
-    </p>
-    <Timeline items={data.career} />
-  </Section>
+      <Section {...sections.career}>
+        <p class="mb-8 text-[15px]/relaxed text-muted">
+          В коммерческой разработке я с 2007 года. Основной фокус — веб-разработка во всём её спектре: от бэкенда и
+          фронтенда до инфраструктуры и процессов (DevOps, CI/CD, организация командной работы). Прошел путь от
+          разработчика, тимлида и СТО до VP of Engineering. Со временем всё больше внимания уделяю не только
+          написанию кода, но и обучению разработчиков и формированию инженерной культуры. С 2015 года полностью
+          переключился на Хекслет и продолжаю заниматься примерно тем же, но уже работая на себя.
+        </p>
+        <Timeline items={data.career} />
+      </Section>
+
+      <footer class="mt-24 flex flex-wrap justify-between gap-2 border-t border-line py-8 font-mono text-xs text-muted">
+        <span>{site.name} — ссылки на статьи, видео и другое</span>
+        <span>Astro + Tailwind CSS</span>
+      </footer>
+    </div>
+  </div>
 </Base>

@@ -8,13 +8,13 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<ul class="mt-6 border-l-2 border-line">
+<ol class="space-y-6 border-t border-line pt-6">
   {
     items.map((item) => (
-      <li class="relative mb-5 pl-6 before:absolute before:top-[9px] before:-left-[7px] before:size-3 before:rounded-full before:border-2 before:border-accent before:bg-page">
-        <strong class="block text-accent">{item.period}</strong>
-        {item.text}
+      <li class="grid gap-1 sm:grid-cols-[9.5rem_1fr] sm:gap-6">
+        <span class="font-mono text-sm text-accent sm:pt-0.5">{item.period}</span>
+        <p class="text-[15px]/relaxed">{item.text}</p>
       </li>
     ))
   }
-</ul>
+</ol>
