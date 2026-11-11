@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/* Colors are theme variables, so utilities like text-ink or bg-accent-soft exist
+   and the dark scheme only swaps the values. */
+@theme {
+  --color-ink: #1d2127;
+  --color-muted: #6b7280;
+  --color-page: #fbfbfa;
+  --color-surface: #fff;
+  --color-line: #e5e7eb;
+  --color-accent: #2f5bd3;
+  --color-accent-soft: #edf2fd;
+}
+
+@layer base {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-ink: #e6e8eb;
+      --color-muted: #9ca3af;
+      --color-page: #121417;
+      --color-surface: #1b1e23;
+      --color-line: #2c3038;
+      --color-accent: #8ab0ff;
+      --color-accent-soft: #1d2638;
+    }
+  }
+
+  /* Defaults for links and code, including those rendered from inline Markdown in src/data.
+     Components override them with utilities. */
+  a {
+    @apply text-accent hover:underline;
+  }
+
+  code {
+    @apply rounded border border-line bg-accent-soft px-1 font-mono text-[0.9em];
+  }
+}

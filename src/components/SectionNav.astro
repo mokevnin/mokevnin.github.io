@@ -1,0 +1,31 @@
+---
+interface Props {
+  sections: { id: string; title: string }[];
+}
+
+const { sections } = Astro.props;
+---
+
+<!--
+  Sticky bar of section links; the nav itself is sticky, so it sticks within the whole <main>. The shadow paints the background edge to edge, so content scrolling
+  under the bar does not show at its sides. On a phone it is one scrollable row.
+-->
+<nav
+  aria-label="Разделы"
+  class="sticky top-0 z-10 mt-7 mb-2 border-b border-line bg-page py-2.5 shadow-[0_0_0_100vmax_var(--color-page)] [clip-path:inset(0_-100vmax)]"
+>
+  <ul class="flex flex-nowrap gap-1 overflow-x-auto [scrollbar-width:none] sm:flex-wrap sm:overflow-visible">
+    {
+      sections.map((section) => (
+        <li class="flex-none">
+          <a
+            class="block rounded-full px-3 py-1 text-sm whitespace-nowrap text-muted hover:bg-accent-soft hover:text-accent hover:no-underline"
+            href={`#${section.id}`}
+          >
+            {section.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

@@ -6,10 +6,12 @@ timeout = 30
 cache = true
 max_cache_age = "1d"
 accept = ["200..=204", "429"]
-exclude_path = ["_site", "vendor"]
+exclude_path = ["node_modules"]
 exclude = [
   # Medium answers CI runners with 403 (bot protection); the links work in a browser.
   "^https://medium\\.com/",
+  # X answers CI runners with 403 (bot protection); the link works in a browser.
+  "^https://x\\.com/",
   # Placeholder hosts in the README.
   "^http://localhost",
 ]

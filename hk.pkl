@@ -9,17 +9,31 @@ local fast = new Mapping<String, Step> {
     ["jactionlint"] = Builtins.jactionlint
 }
 
+// The files the site is built from.
+local site = List("src/**", "astro.config.mjs", "tsconfig.json", "package.json", "package-lock.json")
+// lychee reads dist/ plus the Markdown files, so a change to either needs a fresh build.
+local linked = site + List("*.md")
+
 // Slower or network-bound: pre-push, `check` and CI.
 local all = (fast) {
+    ["astro-check"] {
+        glob = site
+        check = "npx astro check"
+    }
+    ["build"] {
+        glob = linked
+        check = "npm run build"
+    }
+    // Links are checked in the built page, so the ones in src/data and in the layout are covered.
+    // Root-relative links resolve against dist/. Absolute links to this site's own top-level files
+    // (the canonical URL, the sitemap) are checked in dist/ too, not on the previous deployment;
+    // subdirectories are other repositories' project pages and are checked live.
     ["lychee"] {
-        glob = List("**/*.md")
-        check = "lychee --config lychee.toml --no-progress {{ files }}"
+        glob = linked
+        depends = "build"
+        check = #"lychee --config lychee.toml --no-progress --root-dir "$PWD/dist" --remap "^https://mokevnin\.github\.io/([^/]*)$ file://$PWD/dist/\$1" dist README.md AGENTS.md"#
     }
     ["osv-scanner"] = Builtins.osv_scanner
-    ["jekyll"] {
-        glob = List("_config.yml", "*.md", "_*/**", "assets/**", "Gemfile", "Gemfile.lock")
-        check = "bundle exec jekyll build --quiet"
-    }
 }
 
 hooks {

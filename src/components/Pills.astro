@@ -1,0 +1,24 @@
+---
+import type { Link } from "../data";
+
+interface Props {
+  items: Link[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="mb-5 flex flex-wrap gap-2.5">
+  {
+    items.map((item) => (
+      <li>
+        <a
+          class="inline-block rounded-full bg-accent-soft px-4 py-2 font-medium hover:bg-accent hover:text-surface hover:no-underline"
+          href={item.url}
+        >
+          {item.title}
+        </a>
+      </li>
+    ))
+  }
+</ul>

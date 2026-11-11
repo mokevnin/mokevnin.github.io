@@ -1,6 +1,15 @@
 version: 2
 updates:
-  # Gems are not listed: github-pages pins them to what GitHub Pages runs, see Gemfile.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    # One pull request a week instead of one per package; Astro, Vite and Tailwind move together.
+    groups:
+      npm:
+        patterns: ["*"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

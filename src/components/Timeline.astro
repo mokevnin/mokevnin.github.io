@@ -1,0 +1,20 @@
+---
+import type { Milestone } from "../data";
+
+interface Props {
+  items: Milestone[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="mt-6 border-l-2 border-line">
+  {
+    items.map((item) => (
+      <li class="relative mb-5 pl-6 before:absolute before:top-[9px] before:-left-[7px] before:size-3 before:rounded-full before:border-2 before:border-accent before:bg-page">
+        <strong class="block text-accent">{item.period}</strong>
+        {item.text}
+      </li>
+    ))
+  }
+</ul>

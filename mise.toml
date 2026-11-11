@@ -2,8 +2,8 @@
 min_version = "2026.11.5"
 
 [tools]
-# GitHub Pages builds this site with Ruby 3.3 and the github-pages gem; match it locally.
-ruby = "3.3.13"
+# The deploy workflow builds with this Node too, through mise.
+node = "24.22.1"
 hk = "2.11.1"
 pkl = "0.33.0"
 rumdl = "0.3.2"
@@ -13,20 +13,17 @@ betterleaks = "1.10.0"
 osv-scanner = "2.7.1"
 jactionlint = { version = "2.5.0", workflow = "release.yaml" }
 
-[env]
-BUNDLE_PATH = "vendor/bundle"
-
 [tasks.setup]
-description = "Install gems and the git hooks"
-run = ["bundle install", "hk install"]
+description = "Install npm packages and the git hooks"
+run = ["npm ci", "hk install"]
 
 [tasks.serve]
 description = "Serve the site locally with live reload"
-run = "bundle exec jekyll serve --livereload"
+run = "npm run dev"
 
 [tasks.build]
-description = "Build the site the way GitHub Pages does"
-run = "bundle exec jekyll build"
+description = "Build the site into dist/"
+run = "npm run build"
 
 [tasks.check]
 description = "Run every check, the same set CI runs"
