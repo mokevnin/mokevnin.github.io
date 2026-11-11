@@ -14,7 +14,13 @@ github_username: mokevnin
 linkedin_username: mokevnin
 youtube_username: mokevnin
 
-theme: minima
+# No theme: the layouts and the Tailwind styles live in this repository.
+# Null rather than absent, because the github-pages gem otherwise falls back to jekyll-theme-primer.
+theme: null
+
+# Title, description and Open Graph tags in the <head>.
+plugins:
+  - jekyll-seo-tag
 
 # Repository tooling, not site content. Jekyll 3 replaces its default list, so the defaults are repeated.
 exclude:

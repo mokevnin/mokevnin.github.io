@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo -%}
+  {%- comment -%}
+    Tailwind's browser build compiles the styles at runtime from the page's classes and the
+    text/tailwindcss block below. Pinned to an exact version with an integrity hash: to upgrade,
+    change the version and recompute the hash of the new file.
+  {%- endcomment %}
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3/dist/index.global.js"
+          integrity="sha384-2ql948lIdLcGEE0/qxNiudyTjgauA3RDJERu5xW75kFCvSl5a9odyQYCb6tEjnmB"
+          crossorigin="anonymous"></script>
+  {%- include styles.html %}
+</head>
+<body class="bg-page font-sans text-base/normal text-ink antialiased">
+  <header class="border-t-4 border-b border-t-accent border-b-line">
+    <div class="mx-auto max-w-[880px] px-4 py-4 sm:px-8">
+      <a class="text-lg font-light tracking-tight text-muted hover:text-accent" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-[880px] px-4 py-8 sm:px-8" aria-label="Content">
+    {{ content }}
+  </main>
+
+  <footer class="border-t border-line text-sm text-muted">
+    <div class="mx-auto grid max-w-[880px] gap-6 px-4 py-8 sm:grid-cols-3 sm:px-8">
+      <ul>
+        <li>{{ site.author | escape }}</li>
+        {%- if site.email %}
+        <li><a class="hover:text-accent" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        {%- endif %}
+      </ul>
+      <ul>
+        {%- if site.github_username %}
+        <li><a class="hover:text-accent" href="https://github.com/{{ site.github_username | cgi_escape }}">GitHub</a></li>
+        {%- endif %}
+        {%- if site.twitter_username %}
+        <li><a class="hover:text-accent" href="https://x.com/{{ site.twitter_username | cgi_escape }}">X (Twitter)</a></li>
+        {%- endif %}
+        {%- if site.linkedin_username %}
+        <li><a class="hover:text-accent" href="https://www.linkedin.com/in/{{ site.linkedin_username | cgi_escape }}">LinkedIn</a></li>
+        {%- endif %}
+        {%- if site.youtube_username %}
+        <li><a class="hover:text-accent" href="https://youtube.com/{{ site.youtube_username | cgi_escape }}">YouTube</a></li>
+        {%- endif %}
+      </ul>
+      <p>{{ site.description | escape }}</p>
+    </div>
+  </footer>
+</body>
+</html>
