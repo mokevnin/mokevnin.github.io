@@ -1,17 +1,42 @@
 ---
+import { getImage } from "astro:assets";
+import avatar from "../assets/avatar.jpg";
 import { site } from "../site";
 import "../styles/global.css";
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const title = `${site.title} | ${site.description}`;
+
+// The avatar doubles as the link-preview image and the favicon.
+const ogImage = await getImage({ src: avatar, width: 460, height: 460, format: "jpg" });
+const ogImageUrl = new URL(ogImage.src, Astro.site).href;
+const favicon = await getImage({ src: avatar, width: 48, height: 48, format: "png" });
+const touchIcon = await getImage({ src: avatar, width: 180, height: 180, format: "png" });
+
+const siteUrl = new URL("/", Astro.site).href;
+const person = {
+  "@type": "Person",
+  "@id": `${siteUrl}#person`,
+  name: site.author,
+  url: siteUrl,
+  image: ogImageUrl,
+  jobTitle: site.jobTitle,
+  worksFor: { "@type": "Organization", ...site.worksFor },
+  sameAs: site.links.map((link) => link.url),
+};
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: site.title,
-  headline: site.title,
-  description: site.description,
-  url: canonical,
-  author: { "@type": "Person", name: site.author },
+  "@graph": [
+    { "@type": "WebSite", "@id": `${siteUrl}#website`, url: siteUrl, name: site.name, inLanguage: "ru" },
+    {
+      "@type": "ProfilePage",
+      url: canonical,
+      name: site.title,
+      description: site.description,
+      inLanguage: "ru",
+      isPartOf: { "@id": `${siteUrl}#website` },
+      mainEntity: person,
+    },
+  ],
 };
 ---
 
@@ -20,23 +45,37 @@ const jsonLd = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{site.title}</title>
     <meta name="description" content={site.description} />
     <meta name="author" content={site.author} />
     <link rel="canonical" href={canonical} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ru" />
-    <meta property="og:site_name" content={site.title} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/png" href={favicon.src} />
+    <link rel="apple-touch-icon" href={touchIcon.src} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbfa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121417" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={site.title} />
     <meta property="og:description" content={site.description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImage.attributes.width)} />
+    <meta property="og:image:height" content={String(ogImage.attributes.height)} />
+    <meta property="og:image:alt" content={site.author} />
+    <meta property="profile:first_name" content="Кирилл" />
+    <meta property="profile:last_name" content="Мокевнин" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content={`@${site.twitter}`} />
+
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="bg-page font-sans text-base/normal text-ink antialiased">
     <header class="border-t-4 border-b border-t-accent border-b-line">
       <div class="mx-auto max-w-[880px] px-4 py-4 sm:px-8">
-        <a class="text-lg font-light tracking-tight text-muted hover:text-accent hover:no-underline" href="/">{site.title}</a>
+        <a class="text-lg font-light tracking-tight text-muted hover:text-accent hover:no-underline" href="/">{site.name}</a>
       </div>
     </header>
 
@@ -54,12 +93,14 @@ const jsonLd = {
           {
             site.links.map((link) => (
               <li>
-                <a class="text-muted hover:text-accent" href={link.url}>{link.title}</a>
+                <a class="text-muted hover:text-accent" href={link.url} rel="me">
+                  {link.title}
+                </a>
               </li>
             ))
           }
         </ul>
-        <p>{site.description}</p>
+        <p>Ссылки на статьи, видео и другое</p>
       </div>
     </footer>
   </body>

@@ -8,6 +8,7 @@
     "check": "astro check"
   },
   "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.4.2",
     "marked": "18.1.2",
