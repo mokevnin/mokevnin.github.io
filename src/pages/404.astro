@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+
+// GitHub Pages serves this page for every missing path. Sites that moved off mokevnin.github.io
+// leave their old paths here, so the script sends those visitors on to the same path at the new home.
+// Pages can't answer with a 301, so the redirect happens in the browser.
+const moved = { "/smm-bible": "https://smm.hexlet.io" };
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Страница не найдена</title>
+    <script is:inline define:vars={{ moved }}>
+      const { pathname, search, hash } = location;
+      for (const [prefix, target] of Object.entries(moved)) {
+        if (pathname === prefix || pathname.startsWith(`${prefix}/`)) {
+          location.replace(target + (pathname.slice(prefix.length) || "/") + search + hash);
+          break;
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-page font-sans text-base/normal text-ink antialiased">
+    <main class="mx-auto max-w-xl px-5 py-24 sm:px-8">
+      <h1 class="text-3xl font-semibold">Страница не найдена</h1>
+      <p class="mt-4 text-muted">
+        По этому адресу ничего нет. <a class="text-accent underline" href="/">На главную</a>
+      </p>
+    </main>
+  </body>
+</html>
